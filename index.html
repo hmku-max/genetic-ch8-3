@@ -1,0 +1,421 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>細菌與噬菌體基因作圖測驗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Source+Serif+4:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E8EEF0; --paper:#F9FBFC; --ink:#1C2830; --muted:#5B6972; --line:#C7D2D7;
+  --nco:#2A56A2; --nco-bg:#DBE5F6; --dco:#B22E49; --dco-bg:#F6DBE1;
+  --s1:#A86F08; --s1-bg:#F6EACB; --s2:#6A4FA0; --s2-bg:#E7E0F4;
+  --ok:#21805A; --ok-bg:#D5EEE2; --bad:#B22E49;
+  --chrom:#6A4FA0;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121A1F; --paper:#1B252C; --ink:#E5ECEF; --muted:#9AA8B1; --line:#34434D;
+    --nco:#8CAEEC; --nco-bg:#1E3152; --dco:#EF8DA1; --dco-bg:#4A1E29;
+    --s1:#E6B653; --s1-bg:#463411; --s2:#B9A1E6; --s2-bg:#33284A;
+    --ok:#6FD0A0; --ok-bg:#163A2A; --bad:#EF8DA1; --chrom:#B9A1E6;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121A1F; --paper:#1B252C; --ink:#E5ECEF; --muted:#9AA8B1; --line:#34434D;
+  --nco:#8CAEEC; --nco-bg:#1E3152; --dco:#EF8DA1; --dco-bg:#4A1E29;
+  --s1:#E6B653; --s1-bg:#463411; --s2:#B9A1E6; --s2-bg:#33284A;
+  --ok:#6FD0A0; --ok-bg:#163A2A; --bad:#EF8DA1; --chrom:#B9A1E6;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",system-ui,sans-serif;
+  line-height:1.6;-webkit-text-size-adjust:100%}
+.g{font-family:"Source Serif 4",Georgia,"Times New Roman",serif;font-style:italic;font-weight:700;letter-spacing:.01em}
+main{max-width:560px;margin:0 auto;padding:18px 16px 48px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--nco);outline-offset:2px}
+.hidden{display:none!important}
+
+/* home */
+.hero{padding:22px 4px 8px}
+.hero svg{width:100%;max-width:420px;height:auto;display:block;margin:0 auto 14px}
+h1{font-size:2.6rem;line-height:1.15;margin:0 0 8px;font-weight:900;letter-spacing:.02em}
+.lede{color:var(--muted);margin:0 0 22px;font-size:1.02rem}
+.btn{display:block;width:100%;text-align:left;border:2px solid var(--ink);background:var(--paper);
+  border-radius:14px;padding:14px 16px;margin:0 0 12px}
+.btn strong{display:block;font-size:1.08rem}
+.btn span{color:var(--muted);font-size:.92rem}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.primary span{color:var(--paper);opacity:.75}
+.rules{margin:18px 0 0;padding:14px 16px;border-left:4px solid var(--chrom);background:var(--paper);border-radius:0 12px 12px 0;font-size:.94rem}
+.rules ol{margin:6px 0 0;padding-left:1.3em}
+.rules p{margin:0}
+.note{font-size:.82rem;color:var(--muted);margin-top:14px}
+
+/* game */
+.top{display:flex;justify-content:space-between;align-items:center;font-size:.92rem;color:var(--muted);margin-bottom:10px}
+.top b{color:var(--ink)}
+.home-link{background:none;border:none;color:var(--muted);text-decoration:underline;padding:4px 0}
+.steps{display:flex;gap:6px;margin-bottom:14px}
+.steps i{flex:1;height:6px;border-radius:3px;background:var(--line)}
+.steps i.done{background:var(--ok)}
+.steps i.now{background:var(--ink)}
+.setup{background:var(--paper);border-radius:14px;padding:14px 16px;margin-bottom:14px;border:1px solid var(--line)}
+.setup .genes{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:.92rem}
+.chip .g{font-size:1.08rem;margin-right:4px}
+.setup .cross{font-size:.92rem;color:var(--muted)}
+.tag{display:inline-block;font-size:.8rem;border-radius:6px;padding:1px 8px;background:var(--s1-bg);color:var(--s1);margin-left:6px;font-weight:700}
+
+.table{background:var(--paper);border-radius:14px;border:1px solid var(--line);overflow:hidden;margin-bottom:14px}
+.thead,.row{display:grid;grid-template-columns:1fr 1fr 1fr 1.1fr 1.6fr;align-items:center;text-align:center}
+.thead{font-size:.9rem;color:var(--muted);padding:8px 6px;border-bottom:1px solid var(--line)}
+.thead .g{color:var(--ink);font-size:1.05rem}
+.row{width:100%;border:none;border-top:1px solid var(--line);background:transparent;padding:9px 6px;font-size:1.12rem;min-height:46px;transition:background .15s}
+.row:first-of-type{border-top:none}
+.row .n{font-variant-numeric:tabular-nums;font-weight:700}
+.row .lab{font-size:.78rem;font-weight:700}
+.row.sel{background:var(--ink);color:var(--paper)}
+.row.nco{background:var(--nco-bg);color:var(--nco)}
+.row.dco{background:var(--dco-bg);color:var(--dco)}
+.row.s1{background:var(--s1-bg);color:var(--s1)}
+.row.s2{background:var(--s2-bg);color:var(--s2)}
+.row:disabled{cursor:default}
+.row .allele.wt{opacity:.55}
+.row.sel .allele.wt{opacity:.7}
+
+.ask{background:var(--paper);border-radius:14px;border:2px solid var(--ink);padding:14px 16px}
+.ask h2{font-size:1.1rem;margin:0 0 4px}
+.ask .sub{color:var(--muted);font-size:.92rem;margin:0 0 12px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{border:2px solid var(--line);background:var(--bg);border-radius:12px;padding:12px 8px;font-size:1.1rem;font-weight:700}
+.opt.right{border-color:var(--ok);background:var(--ok-bg);color:var(--ok)}
+.opt.wrong{border-color:var(--bad);color:var(--bad);text-decoration:line-through}
+.opt:disabled{cursor:default}
+.opt.picked{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.go{width:100%;border:none;border-radius:12px;padding:13px;background:var(--ink);color:var(--paper);font-weight:700;font-size:1.02rem;margin-top:12px}
+.go:disabled{opacity:.35;cursor:default}
+.fb{margin-top:12px;padding:10px 12px;border-radius:10px;font-size:.95rem}
+.fb.good{background:var(--ok-bg);color:var(--ink);border-left:4px solid var(--ok)}
+.fb.hint{background:var(--dco-bg);color:var(--ink);border-left:4px solid var(--bad)}
+.fb.show{background:var(--s1-bg);color:var(--ink);border-left:4px solid var(--s1)}
+.fb b.pts{float:right;color:var(--ok)}
+.calc{display:block;margin-top:6px;font-variant-numeric:tabular-nums}
+
+.map{margin:4px 0 10px}
+.map svg{width:100%;height:auto;display:block}
+.summary{font-size:.95rem}
+.summary ul{padding-left:1.2em;margin:6px 0}
+
+.final{text-align:center;padding:30px 4px}
+.final .big{font-size:3.6rem;font-weight:900;line-height:1}
+.final .of{color:var(--muted)}
+.final .msg{margin:14px 0 22px}
+
+@media (prefers-reduced-motion: reduce){ .row{transition:none} }
+@media (min-width:600px){ h1{font-size:3rem} }
+
+.qt{font-size:1.08rem;margin:0 0 6px}
+.intro{margin:0 0 12px;font-size:.96rem}
+.intro .g,.dtable .g,.opt .g{font-size:1.06em}
+.dtable{border:1px solid var(--line);border-radius:10px;overflow-x:auto}
+.dr{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(64px,1fr);text-align:center;border-top:1px solid var(--line)}
+.dr:first-child{border-top:none}
+.dr>div{padding:8px 6px;font-variant-numeric:tabular-nums;font-size:1.02rem}
+.dh{background:var(--bg);color:var(--muted);font-size:.9rem}
+.dh>div{font-size:.88rem}
+.dr:not(.dh)>div:not(:first-child),.dtable.all .dr:not(.dh)>div{font-weight:700}
+.pm{font-family:"Noto Sans TC",system-ui,sans-serif;font-style:normal;font-weight:900;font-size:.8em;line-height:0;vertical-align:.5em;margin-left:.05em}
+.fld{display:block;font-weight:700;margin:0 0 12px}
+.fld input{display:block;width:100%;margin-top:6px;padding:12px;border:2px solid var(--line);border-radius:10px;font:inherit;font-size:16px;font-weight:500;background:var(--bg);color:var(--ink)}
+.fld input:focus{outline:none;border-color:var(--ink)}
+.who{background:var(--paper);border:2px solid var(--ink);border-radius:12px;padding:12px 16px;margin-bottom:20px;text-align:left;font-size:1rem;line-height:1.8}
+.final{padding-top:20px}
+.opt{text-align:center;line-height:1.5}
+.steps i{min-width:0}
+.steps{gap:4px}
+.timer{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0;display:flex;justify-content:flex-end;align-items:baseline;gap:8px;margin:0 0 4px;font-variant-numeric:tabular-nums;color:var(--muted)}
+.timer b{color:var(--ink);font-size:1.15rem}
+.st{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px;margin-top:6px;font-size:.88rem}
+.st div{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding:2px 0}
+.st b{font-variant-numeric:tabular-nums}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--paper);padding:12px 18px;border-radius:12px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:10;max-width:calc(100% - 32px);text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.who .warn{color:var(--bad);font-size:1.15rem}
+@media (prefers-reduced-motion: reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<section id="home">
+  <div class="hero">
+    <svg viewBox="0 0 420 120" aria-hidden="true">
+      <ellipse cx="120" cy="62" rx="90" ry="44" fill="var(--chrom)" opacity=".14" stroke="var(--chrom)" stroke-opacity=".4"/>
+      <ellipse cx="300" cy="62" rx="90" ry="44" fill="var(--chrom)" opacity=".08" stroke="var(--chrom)" stroke-opacity=".4"/>
+      <circle cx="120" cy="62" r="24" fill="none" stroke="var(--chrom)" stroke-width="3"/>
+      <circle cx="300" cy="62" r="24" fill="none" stroke="var(--chrom)" stroke-width="3" stroke-dasharray="6 5"/>
+      <rect x="204" y="57" width="12" height="10" rx="3" fill="var(--dco)"/>
+      <path d="M150 62 H270" stroke="var(--dco)" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+    <h1>細菌與噬菌體<br>基因作圖</h1>
+    <p class="lede">接合、轉形、轉導、噬菌體，各一題，共 12 小題。每個人的題目都不同。</p>
+  </div>
+  <button class="btn primary" id="start"><strong>開始測驗</strong><span>4 大題，每大題 3 小題</span></button>
+  <div class="rules">
+    <p>作答規則：</p>
+    <ol>
+      <li>每小題選一個答案，再按「確認作答」</li>
+      <li>每小題只能作答一次</li>
+      <li>作答過程不提示對錯</li>
+      <li>交卷後只顯示分數</li>
+    </ol>
+    <p style="margin-top:6px">不限時，但會記錄<b>每小題用時和總時間</b>。作答中切換到其他 App 或分頁，會被記錄在成績頁。</p>
+  </div>
+  <p class="note" id="bestNote"></p>
+  <p class="note">每次開始測驗都會重新出題，每個人的基因和數字都不同。題目數字為程式產生的教學用虛構資料，不代表真實圖譜位置。</p>
+</section>
+
+<section id="game" class="hidden">
+  <div class="top"><span id="roundInfo"></span><span id="partInfo"></span></div>
+  <div class="steps" id="steps"></div>
+  <div class="timer" id="timer"><span>已用時間</span><b id="tleft">0:00</b></div>
+  <div class="setup" id="setup"></div>
+  <div class="ask" id="ask"></div>
+  <p style="text-align:center;margin-top:16px"><button class="home-link" id="quit">回首頁</button></p>
+</section>
+
+<section id="final" class="hidden">
+  <div id="idForm" class="ask" style="margin-top:20px">
+    <h2>交卷完成</h2>
+    <p class="sub">請填寫學號和姓名後查看成績，成績畫面請截圖交給老師。</p>
+    <label class="fld">學號<input id="sid" autocomplete="off" autocapitalize="characters"></label>
+    <label class="fld">姓名<input id="sname" autocomplete="off"></label>
+    <button class="go" id="showScore" disabled>查看成績</button>
+  </div>
+  <div class="final hidden" id="result">
+    <div class="who" id="who"></div>
+    <div class="big" id="finalScore">0</div>
+    <div class="of" id="finalOf"></div>
+    <p class="msg" id="finalMsg"></p>
+    <div class="rules" id="perQ" style="text-align:left;margin:0 0 22px"></div>
+    <button class="btn" id="toHome"><strong>回首頁</strong><span>回到說明頁</span></button>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const g=s=>`<span class="g">${s}</span>`;
+const fx=h=>h.replace(/⁺/g,'<sup class="pm">+</sup>').replace(/⁻/g,'<sup class="pm">−</sup>');
+const tbl=(head,rows,cls='')=>`<div class="dtable ${cls}" role="table"><div class="dr dh">${head.map(x=>`<div>${x}</div>`).join('')}</div>${rows.map(r=>`<div class="dr">${r.map(x=>`<div>${x}</div>`).join('')}</div>`).join('')}</div>`;
+
+/* 題目產生器：每次開始測驗都重新出題，每個人的數字和基因都不同 */
+const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pickN=(arr,n)=>shuffle(arr.slice()).slice(0,n);
+const pct=x=>{const v=Math.round(x*10)/10;return (Number.isInteger(v)?v.toFixed(0):v.toFixed(1))+'%';};
+function mkOpts(correct,cands,need,filler){
+  const out=[correct];
+  for(const c of cands){if(out.length>=need)break;if(!out.includes(c))out.push(c);}
+  let g=0;while(out.length<need&&g++<200){const c=filler();if(!out.includes(c))out.push(c);}
+  return out;
+}
+function genConj(){
+  const genes=pickN(['met','pur','xyl','mal','thr','leu','lac','gal','trp','his','pro','thi','arg','azi','ton'],4);
+  const t=[ri(3,8)];for(let i=1;i<4;i++)t.push(t[i-1]+ri(5,11));
+  const seq=genes.map(x=>g(x)).join(' – ');
+  const ord=a=>'起點 – '+a.map(i=>g(genes[i])).join(' – ');
+  const permC=[[3,2,1,0],[0,2,1,3],[1,0,3,2],[0,1,3,2],[1,0,2,3]];
+  const o=mkOpts(ord([0,1,2,3]),shuffle(permC.slice()).map(ord),4,()=>ord(shuffle([0,1,2,3])));
+  const k=ri(0,2), d=t[k+1]-t[k];
+  const dOpts=mkOpts(`${d} 分鐘`,[`${t[k+1]} 分鐘`,`${t[k+1]-t[0]} 分鐘`,`${t[k]} 分鐘`,`${t[k+1]+t[k]} 分鐘`],4,()=>`${d+ri(-4,6)} 分鐘`);
+  const m=ri(1,3), T=ri(t[m-1]+1,t[m]-1);
+  const upto=n=>n>=4?'四種都有':genes.slice(0,n).map(x=>g(x+'⁺')).join('、');
+  const cOpts=[upto(m),...[1,2,3,4].filter(n=>n!==m).map(upto)];
+  const rows=shuffle([0,1,2,3]).map(i=>[g(genes[i]),String(t[i])]);
+  const mix=shuffle(genes.slice()), plus=mix.map(x=>x+'⁺').join(' '), minus=mix.map(x=>x+'⁻').join(' ');
+  return { name:'接合作用', title:'第 1 題　接合作用（中斷交配）',
+    intro:`Hfr（${g(plus+' str<sup>s</sup>')}）× F⁻（${g(minus+' str<sup>r</sup>')}）。在不同時間中斷交配，塗在含鏈黴素的培養基上，各基因重組株最早出現的時間如下：`,
+    table:tbl(['基因','最早出現（分鐘）'],rows),
+    subs:[
+      {q:'(a) 基因進入 F⁻ 細胞的順序？',opts:o,ans:0,wide:true},
+      {q:`(b) ${g(genes[k])} 和 ${g(genes[k+1])} 相距多少分鐘？`,opts:dOpts,ans:0},
+      {q:`(c) 若在第 ${T} 分鐘中斷交配，可能得到哪些重組株？`,opts:cOpts,ans:0,wide:true}
+    ]};
+}
+function genTrans(){
+  const [X,A,B]=pickN(['trp','tyr','cys','his','ade','lys','phe','ilv','ser','gly'],3);
+  const nearA=Math.random()<.5;
+  const mk=(lo,hi)=>{for(let k=0;k<500;k++){const T=ri(40,95)*10,idx=lo+Math.random()*(hi-lo),D=Math.round(T*idx),rest=T-D,a=Math.round(rest*(0.45+Math.random()*0.15)),b=rest-a;
+      if(D>0&&a>0&&b>0&&a!==b)return {D,a,b,T};}};
+  const p1=nearA?mk(.45,.75):mk(.03,.12), p2=nearA?mk(.03,.12):mk(.45,.75);
+  const idx=p=>(p.D/p.T).toFixed(2);
+  const io=p=>mkOpts(idx(p),[(p.D/(p.D+p.a)).toFixed(2),(p.D/(p.D+p.b)).toFixed(2),((p.a+p.b)/p.T).toFixed(2),(p.a/p.T).toFixed(2)],4,()=>(Math.random()*0.9+0.02).toFixed(2));
+  return { name:'轉形作用', title:'第 2 題　轉形作用（共轉形）',
+    intro:`供體 ${g(X+'⁺ '+A+'⁺ '+B+'⁺')}，受體 ${g(X+'⁻ '+A+'⁻ '+B+'⁻')}。分別分析兩組基因的轉形株數目：`,
+    table:tbl(['組合','雙轉形','只有 '+g(X+'⁺'),'只有另一個 ⁺'],[[g(X)+'、'+g(A),String(p1.D),String(p1.a),String(p1.b)],[g(X)+'、'+g(B),String(p2.D),String(p2.a),String(p2.b)]]),
+    subs:[
+      {q:`(a) ${g(X)}、${g(A)} 的共轉形指數？`,opts:io(p1),ans:0},
+      {q:`(b) ${g(X)}、${g(B)} 的共轉形指數？`,opts:io(p2),ans:0},
+      {q:`(c) ${g(A)} 和 ${g(B)}，哪一個離 ${g(X)} 比較近？`,opts:nearA?[g(A),g(B),'一樣近','無法判斷']:[g(B),g(A),'一樣近','無法判斷'],ans:0}
+    ]};
+}
+function genTransd(){
+  const [S,P,Qn]=pickN(['leu','ara','thr','pro','his','gal','lac','pur','arg','val'],3);
+  const nearIsP=Math.random()<.5, NR=nearIsP?P:Qn, FR=nearIsP?Qn:P;
+  for(let k=0;k<500;k++){
+    const N=[400,500,600,800,1000][ri(0,4)];
+    const pp=Math.round(N*(0.02+Math.random()*0.05)), rare=ri(1,3);
+    const pm=Math.round(N*(0.28+Math.random()*0.27))-pp, mm=N-pp-pm-rare;
+    if(pm<=pp*3||mm<=pm*0.6||pp<=rare*2)continue;
+    const cNear=(pp+pm)/N*100, cFar=(pp+rare)/N*100;
+    // 表格欄位：P、Q，依 nearIsP 對應
+    const row=(np,fp,n)=>nearIsP?[np,fp,String(n)]:[fp,np,String(n)];
+    const rows=[row('⁺','⁺',pp),row('⁺','⁻',pm),row('⁻','⁺',rare),row('⁻','⁻',mm)];
+    const aO=mkOpts(pct(cNear),[pct(pm/N*100),pct(pp/N*100),pct((pp+pm+rare)/N*100),pct(100-cNear)],4,()=>pct(cNear+ri(-9,9)));
+    const bO=mkOpts(pct(cFar),[pct(pp/N*100),pct(rare/N*100),pct((pp+pm+rare)/N*100),pct(cFar+cNear)],4,()=>pct(cFar+ri(1,6)));
+    const ord=a=>a.map(x=>g(x)).join(' – ');
+    return { name:'轉導作用', title:'第 3 題　轉導作用（P1 共轉導）',
+      intro:`供體 ${g(S+'⁺ '+P+'⁺ '+Qn+'⁺')}，受體 ${g(S+'⁻ '+P+'⁻ '+Qn+'⁻')}。篩選出 ${N} 個 ${g(S+'⁺')} 轉導株，再檢查另外兩個基因：`,
+      table:tbl([g(P),g(Qn),'數目'],shuffle(rows)),
+      subs:[
+        {q:`(a) ${g(S)}–${g(NR)} 的共轉導頻率？`,opts:aO,ans:0},
+        {q:`(b) ${g(S)}–${g(FR)} 的共轉導頻率？`,opts:bO,ans:0},
+        {q:'(c) 三個基因的順序？',opts:[ord([FR,NR,S]),ord([NR,FR,S]),ord([NR,S,FR])],ans:0,wide:true}
+      ]};
+  }
+}
+function genPhage(){
+  const N=1000;
+  for(let k=0;k<500;k++){
+    const R=ri(6,20)*10, d=R/10;
+    const r1=Math.round(R*(0.42+Math.random()*0.16)), r2=R-r1, P1=Math.round((N-R)*(0.46+Math.random()*0.08)), P2=N-R-P1;
+    if(r1===r2||P1===P2)continue;
+    const type=ri(0,2); let e,ac,bc,ans;
+    if(type===2){e=ri(2,Math.max(2,Math.floor(d)-2));if(e>=d)continue;ac=e;bc=r1d(d-e);ans=`${g('a')} – ${g('c')} – ${g('b')}`;}
+    else{e=ri(2,9);if(type===0){bc=e;ac=r1d(d+e);ans=`${g('a')} – ${g('b')} – ${g('c')}`;}else{ac=e;bc=r1d(d+e);ans=`${g('b')} – ${g('a')} – ${g('c')}`;}}
+    if(Math.abs(ac-bc)<1e-9)continue;
+    const ords=[`${g('a')} – ${g('b')} – ${g('c')}`,`${g('b')} – ${g('a')} – ${g('c')}`,`${g('a')} – ${g('c')} – ${g('b')}`];
+    const cols=shuffle([[g('a⁺ b'),P1],[g('a b⁺'),P2],[g('a⁺ b⁺'),r1],[g('a b'),r2]]);
+    const bO=mkOpts(pct(d),[pct(R/(N-R)*100),pct(100-d),pct(r1/10),pct(d/2)],4,()=>pct(d+ri(-5,5)));
+    return { name:'噬菌體', title:'第 4 題　噬菌體基因作圖',
+      intro:`T4 雜交 ${g('a⁺ b')} × ${g('a b⁺')}，子代溶菌斑共 ${N} 個，計數如下。另外已知 ${g('b')}–${g('c')} = ${bc}%，${g('a')}–${g('c')} = ${ac}%。`,
+      table:tbl(cols.map(c=>c[0]),[cols.map(c=>String(c[1]))],'all'),
+      subs:[
+        {q:'(a) 哪兩類是重組型？',opts:[`${g('a⁺ b⁺')} 和 ${g('a b')}`,`${g('a⁺ b')} 和 ${g('a b⁺')}`,`${g('a⁺ b')} 和 ${g('a b')}`,`${g('a b⁺')} 和 ${g('a⁺ b⁺')}`],ans:0,wide:true},
+        {q:`(b) ${g('a')}–${g('b')} 的重組率？`,opts:bO,ans:0},
+        {q:'(c) 三個基因的順序？',opts:[ans,...ords.filter(x=>x!==ans)],ans:0,wide:true}
+      ]};
+  }
+}
+const r1d=x=>Math.round(x*10)/10;
+function makeQuiz(){return [genConj(),genTrans(),genTransd(),genPhage()];}
+let Q=makeQuiz();
+const ATT_KEY='bact-attempts';
+/* 作答紀錄：計時與離開頁面偵測 */
+const G={leaves:0,awayMs:0,awayAt:0,away:false,active:false,tid:null,stepAt:0,t0:0,steps:[],attempt:0,startAt:null};
+function gReset(){
+  G.leaves=0;G.awayMs=0;G.away=false;G.active=true;G.steps=[];G.t0=Date.now();G.stepAt=G.t0;G.startAt=new Date();
+  try{G.attempt=+(localStorage.getItem(ATT_KEY)||0)+1;localStorage.setItem(ATT_KEY,String(G.attempt));}catch(e){G.attempt=0;}
+  stopClock();G.tid=setInterval(clock,500);clock();
+}
+function markLeave(){if(!G.active||G.away)return;G.away=true;G.awayAt=Date.now();G.leaves++;}
+function markBack(){if(!G.away)return;G.away=false;G.awayMs+=Date.now()-G.awayAt;if(G.active)toast(`已記錄：離開頁面 ${G.leaves} 次`);}
+document.addEventListener('visibilitychange',()=>{document.hidden?markLeave():markBack();});
+window.addEventListener('blur',markLeave);
+window.addEventListener('focus',markBack);
+window.addEventListener('pagehide',markLeave);
+let toastT=null;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),2600);}
+const mmss=ms=>{const s=Math.floor(ms/1000);return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;};
+function clock(){$('#tleft').textContent=mmss(Date.now()-G.t0);}
+function stopClock(){if(G.tid)clearInterval(G.tid);G.tid=null;}
+function stepEnd(label){const now=Date.now();G.steps.push({label,ms:now-G.stepAt});G.stepAt=now;}
+function gEnd(){if(G.away)markBack();stopClock();G.active=false;}
+const secs=ms=>`${Math.round(ms/1000)} 秒`;
+const hm=d=>`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}`;
+function guardLines(){
+  const at=G.attempt>1?`<div class="warn">本裝置第 <b>${G.attempt}</b> 次作答</div>`:`<div>本裝置第 <b>${G.attempt||1}</b> 次作答</div>`;
+  const lv=G.leaves>0?`<div class="warn">離開頁面：<b>${G.leaves} 次，共 ${secs(G.awayMs)}</b></div>`:`<div>離開頁面：<b>0 次</b></div>`;
+  return `<div>開始時間：${hm(G.startAt)}</div>`+at+lv;
+}
+function stepTable(){
+  return '<p style="margin-top:12px">每小題用時</p><div class="st">'+G.steps.map(s=>`<div><span>${s.label}</span><b>${secs(s.ms)}</b></div>`).join('')+'</div>';
+}
+
+const TOTAL=Q.reduce((s,q)=>s+q.subs.length,0);
+
+let qi=0,si=0,pick=null,right=[],order=[],t0=0,qStart=0,times=[],S_end=null;
+function show(id){['home','game','final'].forEach(s=>$('#'+s).classList.toggle('hidden',s!==id));window.scrollTo(0,0);}
+function start(){Q=makeQuiz();gReset();qi=0;si=0;right=Q.map(()=>0);t0=Date.now();qStart=t0;times=Q.map(()=>0);
+  order=Q.map(q=>q.subs.map(s=>shuffle(s.opts.map((_,i)=>i))));
+  show('game');render(true);}
+function flat(){let n=0;for(let i=0;i<qi;i++)n+=Q[i].subs.length;return n+si;}
+function render(newQ){
+  const q=Q[qi],s=q.subs[si];pick=null;
+  $('#roundInfo').innerHTML=`第 <b>${qi+1}</b> / ${Q.length} 題`;
+  $('#partInfo').textContent=`第 ${flat()+1} / ${TOTAL} 小題`;
+  $('#steps').innerHTML=Array.from({length:TOTAL},(_,i)=>`<i class="${i<flat()?'done':i===flat()?'now':''}"></i>`).join('');
+  if(newQ) $('#setup').innerHTML=fx(`<h2 class="qt">${q.title}</h2><p class="intro">${q.intro}</p>${q.table}`);
+  const last=qi===Q.length-1&&si===q.subs.length-1;
+  $('#ask').innerHTML=fx(`<h2>${s.q}</h2><p class="sub">選一個答案。</p>
+    <div class="opts" style="grid-template-columns:${s.wide?'1fr':'1fr 1fr'}">${order[qi][si].map(i=>`<button class="opt" data-i="${i}" aria-pressed="false">${s.opts[i]}</button>`).join('')}</div>
+    <button class="go" id="confirm" disabled>${last?'交卷':'確認作答'}</button>`);
+  $('#ask').querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    $('#ask').querySelectorAll('.opt').forEach(x=>{x.classList.remove('picked');x.setAttribute('aria-pressed','false');});
+    b.classList.add('picked');b.setAttribute('aria-pressed','true');pick=+b.dataset.i;$('#confirm').disabled=false;}));
+  $('#confirm').addEventListener('click',()=>submit(false));
+}
+function submit(to){
+  if(to!==true&&pick===null)return;
+  if(to!==true&&pick===Q[qi].subs[si].ans) right[qi]++;
+  stepEnd(`${qi+1}${'abc'[si]} ${Q[qi].name}`);
+  si++;
+  if(si>=Q[qi].subs.length){times[qi]=Date.now()-qStart;qStart=Date.now();si=0;qi++;if(qi>=Q.length){finish();return;}render(true);window.scrollTo(0,0);}
+  else{render(false);$('#ask').scrollIntoView({block:'nearest'});}
+}
+const getB=()=>{try{return +(localStorage.getItem('bact-map-best')||0);}catch(e){return 0;}};
+const setB=v=>{try{localStorage.setItem('bact-map-best',String(v));}catch(e){}};
+const fmt=ms=>{const s=Math.round(ms/1000);return s>=60?`${Math.floor(s/60)} 分 ${s%60} 秒`:`${s} 秒`;};
+const pad=n=>String(n).padStart(2,'0');
+const esc=t=>t.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function finish(){
+  gEnd();
+  const end=new Date();S_end={end,total:end-t0};
+  const n=right.reduce((a,b)=>a+b,0),score=Math.round(n/TOTAL*100),best=Math.max(getB(),score);setB(best);
+  $('#finalScore').textContent=score;
+  $('#finalOf').textContent=`答對 ${n} / ${TOTAL} 小題`;
+  $('#finalMsg').textContent=score>=90?'四種作圖方法都掌握得很好。':score>=60?'大致掌握了，部分題型還需要加強。':'建議回去複習細菌遺傳的教學影片，再作答一次。';
+  $('#perQ').innerHTML='<p>各大題結果</p><ol>'+Q.map((q,i)=>`<li>${q.name}：答對 ${right[i]} / ${q.subs.length}，用時 ${fmt(times[i])}</li>`).join('')+'</ol>'+stepTable();
+  $('#sid').value='';$('#sname').value='';$('#showScore').disabled=true;
+  $('#idForm').classList.remove('hidden');$('#result').classList.add('hidden');
+  show('final');note();
+}
+function revealScore(){
+  const id=$('#sid').value.trim(),nm=$('#sname').value.trim();if(!id||!nm)return;
+  const e=S_end.end;
+  $('#who').innerHTML=`<div>學號：<b>${esc(id)}</b></div><div>姓名：<b>${esc(nm)}</b></div><div>完成時間：${e.getFullYear()}/${pad(e.getMonth()+1)}/${pad(e.getDate())} ${pad(e.getHours())}:${pad(e.getMinutes())}</div><div>總作答時間：<b>${fmt(S_end.total)}</b></div>${guardLines()}`;
+  $('#idForm').classList.add('hidden');$('#result').classList.remove('hidden');window.scrollTo(0,0);
+}
+function note(){const b=getB();$('#bestNote').textContent=b?`最佳紀錄：${b} 分`:'';}
+$('#start').addEventListener('click',start);
+['#sid','#sname'].forEach(s=>$(s).addEventListener('input',()=>{$('#showScore').disabled=!($('#sid').value.trim()&&$('#sname').value.trim());}));
+$('#showScore').addEventListener('click',revealScore);
+$('#toHome').addEventListener('click',()=>{show('home');note();});
+$('#quit').addEventListener('click',()=>{const was=G.active;G.active=false;if(confirm('確定要離開嗎？這次的作答不會保留。')){gEnd();show('home');note();} else G.active=was;});
+note();
+})();
+</script>
+
+</body>
+</html>
+</body></html>
